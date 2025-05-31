@@ -119,38 +119,140 @@
             position: relative;
             z-index: 2;
         }
-
+        
+        /* .cake {
+            position: relative;
+            animation: cakeEntrance 2s ease-out;
+        } */
+        /* ADDING THE NEW STYLE*/
         .cake {
             position: relative;
             animation: cakeEntrance 2s ease-out;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3));
         }
 
         .cake-base {
+            width: 240px;
+            height: 90px;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+            border-radius: 15px 15px 8px 8px;
+            margin-bottom: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cake-base::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: linear-gradient(90deg, #F4A460 0%, #DEB887 50%, #F4A460 100%);
+            border-radius: 15px 15px 0 0;
+        }
+
+        .cake-base::after {
+            content: '🍫🍫🍫🍫🍫🍫🍫🍫';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            letter-spacing: 8px;
+        }
+
+        .cake-layer {
+            width: 200px;
+            height: 70px;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 30%, #FFCCCB 70%, #FFB6C1 100%);
+            border-radius: 12px 12px 6px 6px;
+            margin: -3px auto 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cake-layer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 15px;
+            background: linear-gradient(90deg, #FF69B4 0%, #FFB6C1 50%, #FF69B4 100%);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .cake-layer::after {
+            content: '🌸🌸🌸🌸🌸🌸🌸';
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            letter-spacing: 6px;
+        }
+
+        .cake-top {
+            width: 160px;
+            height: 60px;
+            background: linear-gradient(135deg, #FF1493 0%, #FF69B4 30%, #FF91A4 70%, #FF1493 100%);
+            border-radius: 10px 10px 5px 5px;
+            margin: -3px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cake-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: linear-gradient(90deg, #DC143C 0%, #FF1493 50%, #DC143C 100%);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .cake-top::after {
+            content: '💎💎💎💎💎💎';
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8px;
+            letter-spacing: 4px;
+        }
+
+
+
+        /* END OF NEW STYLE*/
+        /* .cake-base {
             width: 200px;
             height: 80px;
             background: linear-gradient(45deg, #8b4513, #a0522d);
             border-radius: 10px;
             margin-bottom: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+        } */
 
-        .cake-layer {
+        /* .cake-layer {
             width: 180px;
             height: 60px;
             background: linear-gradient(45deg, #ffb6c1, #ffc0cb);
             border-radius: 8px;
             margin: -5px auto 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
+        } */
 
-        .cake-top {
+        /* .cake-top {
             width: 160px;
             height: 50px;
             background: linear-gradient(45deg, #ff69b4, #ff1493);
             border-radius: 8px;
             margin: -5px auto;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
+        } */
 
         .candles-container {
             position: absolute;
