@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love! 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Secret Code Section */
+        .secret-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+        }
+
+        .secret-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hearts" patternUnits="userSpaceOnUse" width="20" height="20"><text x="10" y="15" text-anchor="middle" fill="rgba(255,255,255,0.1)" font-size="12">💖</text></pattern></defs><rect width="100" height="100" fill="url(%23hearts)"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .secret-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 2;
+            position: relative;
+        }
+
+        .secret-title {
+            font-size: 2.5em;
+            color: #4a5568;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .secret-subtitle {
+            font-size: 1.2em;
+            color: #718096;
+            margin-bottom: 30px;
+        }
+
+        .secret-input {
+            padding: 15px 25px;
+            font-size: 1.3em;
+            border: 3px solid #e2e8f0;
+            border-radius: 15px;
+            width: 300px;
+            text-align: center;
+            margin-bottom: 25px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .secret-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            transform: scale(1.05);
+        }
+
+        .secret-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 35px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .secret-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Birthday Section */
+        .birthday-section {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cake-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cake {
+            position: relative;
+            animation: cakeEntrance 2s ease-out;
+        }
+
+        .cake-base {
+            width: 200px;
+            height: 80px;
+            background: linear-gradient(45deg, #8b4513, #a0522d);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .cake-layer {
+            width: 180px;
+            height: 60px;
+            background: linear-gradient(45deg, #ffb6c1, #ffc0cb);
+            border-radius: 8px;
+            margin: -5px auto 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cake-top {
+            width: 160px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            border-radius: 8px;
+            margin: -5px auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .candles-container {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .candle {
+            width: 8px;
+            height: 30px;
+            background: linear-gradient(to bottom, #ffeb3b, #ffc107);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .flame {
+            width: 12px;
+            height: 15px;
+            background: radial-gradient(circle, #ff6b35, #ff4757);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.5s ease-in-out infinite alternate;
+            transition: opacity 0.3s ease;
+        }
+
+        .blown-out {
+            opacity: 0;
+        }
+
+        .birthday-message {
+            margin-top: 50px;
+            font-size: 3em;
+            color: #2d3436;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .show-message {
+            animation: messageAppear 1s ease-out forwards;
+        }
+
+        .blow-instruction {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #2d3436;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .microphone-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 0.9em;
+            z-index: 100;
+        }
+
+        .mic-active {
+            background: rgba(76, 175, 80, 0.9) !important;
+            color: white;
+        }
+
+        .mic-listening {
+            background: rgba(255, 152, 0, 0.9) !important;
+            color: white;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        /* Gift Section */
+        .gift-section {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .gift-box {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            animation: giftPulse 2s ease-in-out infinite;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .gift-ribbon-v {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ffd700, #ffb347);
+        }
+
+        .gift-ribbon-h {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to right, #ffd700, #ffb347);
+        }
+
+        .gift-bow {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 30px;
+            background: #ff1744;
+            border-radius: 50%;
+        }
+
+        .gift-bow::before,
+        .gift-bow::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 25px;
+            background: #ff1744;
+            border-radius: 50% 10px;
+            top: 2px;
+        }
+
+        .gift-bow::before {
+            left: -15px;
+            transform: rotate(-45deg);
+        }
+
+        .gift-bow::after {
+            right: -15px;
+            transform: rotate(45deg);
+        }
+
+        /* Animation Section */
+        .animation-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fad0c4, #a8edea);
+            background-size: 400% 400%;
+            animation: gradientShift 4s ease infinite;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .love-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            color: rgba(255, 255, 255, 0.8);
+            animation: floatUp 4s linear infinite;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        .confetti:nth-child(2n) { background: #4ecdc4; }
+        .confetti:nth-child(3n) { background: #45b7d1; }
+        .confetti:nth-child(4n) { background: #f9ca24; }
+        .confetti:nth-child(5n) { background: #6c5ce7; }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes cakeEntrance {
+            0% { opacity: 0; transform: translateY(100px) scale(0.5); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-1deg); }
+            100% { transform: translateX(-50%) scale(1.1) rotate(1deg); }
+        }
+
+        @keyframes messageAppear {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes giftPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(720deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        .hidden { display: none; }
+        .show { display: flex; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .secret-container { padding: 40px 20px; }
+            .secret-input { width: 250px; }
+            .birthday-message { font-size: 2em; }
+            .love-message { font-size: 1.8em; padding: 0 20px; }
+            .microphone-status { top: 10px; right: 10px; font-size: 0.8em; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Microphone Status -->
+    <div id="micStatus" class="microphone-status">🎤 Microphone: Not started</div>
+
+    <!-- Secret Code Section -->
+    <div id="secretSection" class="secret-section">
+        <div class="secret-container">
+            <h1 class="secret-title">💝 A Special Surprise Awaits 💝</h1>
+            <p class="secret-subtitle">Enter the secret code to unlock your birthday surprise!</p>
+            <input type="text" id="secretCode" class="secret-input" placeholder="Enter secret code...">
+            <br>
+            <button onclick="validateCode()" class="secret-btn">Unlock Surprise</button>
+        </div>
+    </div>
+
+    <!-- Birthday Section -->
+    <div id="birthdaySection" class="birthday-section">
+        <div class="cake-container">
+            <div class="cake">
+                <div class="candles-container">
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+                </div>
+                <div class="cake-top"></div>
+                <div class="cake-layer"></div>
+                <div class="cake-base"></div>
+            </div>
+            <div class="blow-instruction">
+                🌬️ Blow into your microphone to extinguish the candles! 🌬️
+            </div>
+            <div id="birthdayMessage" class="birthday-message">
+                🎉 Happy Birthday Beautiful! 🎉
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift Section -->
+    <div id="giftSection" class="gift-section">
+        <div class="gift-box" onclick="openGift()">
+            <div class="gift-ribbon-v"></div>
+            <div class="gift-ribbon-h"></div>
+            <div class="gift-bow"></div>
+        </div>
+    </div>
+
+    <!-- Animation Section -->
+    <div id="animationSection" class="animation-section">
+        <div class="love-message">
+            💖 You mean the world to me! 💖<br>
+            <div style="font-size: 0.7em; margin-top: 20px;">
+                Every day with you is a gift.<br>
+                Happy Birthday, my love! 🌹
+            </div>
+        </div>
+        <div class="floating-hearts" id="floatingHearts"></div>
+    </div>
+
+    <!-- Audio for Birthday Song -->
+    <audio id="birthdaySong" loop>
+        <!-- <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1+zEeSwFJHfH8N2QQAoUXrTp66hVFApGn+DwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeC4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zEeS4FJnfH8N2QQAoUXrTp66hVFApGnuDwuGIcBjiS2OzFeBYFJHfH8N2QQAoUXbPo7KlXFAlGnt/vuWAdBzuO1+zE" type="audio/wav"> -->
+    </audio>
+
+    <script>
+        const SECRET_CODE = "ILOVEYOU"; // Change this to your desired secret code
+        let candlesBlown = 0;
+        const totalCandles = 5;
+        let mediaRecorder;
+        let audioContext;
+        let analyser;
+        let microphone;
+        let isListening = false;
+        let candles = [];
+
+        function validateCode() {
+            const code = document.getElementById('secretCode').value.toUpperCase();
+            if (code === SECRET_CODE) {
+                document.getElementById('secretSection').style.display = 'none';
+                document.getElementById('birthdaySection').style.display = 'block';
+                
+                // Initialize candles array
+                candles = document.querySelectorAll('.candle');
+                
+                // Start microphone
+                startMicrophone();
+                
+                // Play birthday song
+                document.getElementById('birthdaySong').play().catch(e => {
+                    console.log('Audio autoplay blocked');
+                });
+                
+                setTimeout(() => {
+                    createConfetti();
+                }, 1000);
+            } else {
+                alert('Wrong code! Try again with something that expresses your feelings! 💕');
+                document.getElementById('secretCode').value = '';
+            }
+        }
+
+        async function startMicrophone() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                microphone = audioContext.createMediaStreamSource(stream);
+                
+                analyser.fftSize = 256;
+                const bufferLength = analyser.frequencyBinCount;
+                const dataArray = new Uint8Array(bufferLength);
+                
+                microphone.connect(analyser);
+                
+                updateMicrophoneStatus('🎤 Microphone: Active - Ready to detect blowing!', 'mic-active');
+                isListening = true;
+                
+                // Start analyzing audio
+                function analyze() {
+                    if (!isListening) return;
+                    
+                    analyser.getByteFrequencyData(dataArray);
+                    
+                    // Calculate average volume
+                    let sum = 0;
+                    for (let i = 0; i < bufferLength; i++) {
+                        sum += dataArray[i];
+                    }
+                    const average = sum / bufferLength;
+                    
+                    // Detect blowing (look for sudden increase in volume, especially in lower frequencies)
+                    const lowFreqSum = dataArray.slice(0, 30).reduce((a, b) => a + b, 0) / 30;
+                    
+                    if (lowFreqSum > 50 && average > 30) { // Threshold for detecting blowing
+                        updateMicrophoneStatus('🌬️ Blowing detected!', 'mic-listening');
+                        detectBlow();
+                    }
+                    
+                    requestAnimationFrame(analyze);
+                }
+                
+                analyze();
+                
+            } catch (error) {
+                console.error('Error accessing microphone:', error);
+                updateMicrophoneStatus('🎤 Microphone: Access denied or not available', '');
+                // Fallback to click for devices without microphone access
+                enableClickFallback();
+            }
+        }
+
+        function enableClickFallback() {
+            candles.forEach(candle => {
+                candle.style.cursor = 'pointer';
+                candle.addEventListener('click', () => blowCandle(candle));
+            });
+        }
+
+        function updateMicrophoneStatus(text, className) {
+            const micStatus = document.getElementById('micStatus');
+            micStatus.textContent = text;
+            micStatus.className = 'microphone-status ' + className;
+        }
+
+        function detectBlow() {
+            if (candlesBlown >= totalCandles) return;
+            
+            // Blow out the next candle
+            const nextCandle = candles[candlesBlown];
+            if (nextCandle) {
+                blowCandle(nextCandle);
+            }
+        }
+
+        function blowCandle(candle) {
+            const flame = candle.querySelector('.flame');
+            if (flame.classList.contains('blown-out')) return; // Already blown out
+            
+            flame.classList.add('blown-out');
+            candlesBlown++;
+            
+            // Add some smoke effect
+            createSmoke(candle);
+            
+            // Update microphone status
+            updateMicrophoneStatus(`🌬️ Candle ${candlesBlown} blown out! ${totalCandles - candlesBlown} left`, 'mic-active');
+            
+            if (candlesBlown === totalCandles) {
+                setTimeout(() => {
+                    document.getElementById('birthdayMessage').classList.add('show-message');
+                    createConfetti();
+                    updateMicrophoneStatus('🎉 All candles blown out! Well done!', 'mic-active');
+                    isListening = false; // Stop listening
+                    setTimeout(showGift, 3000);
+                }, 500);
+            }
+        }
+
+        function createSmoke(candle) {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const smoke = document.createElement('div');
+                    smoke.style.position = 'absolute';
+                    smoke.style.width = '4px';
+                    smoke.style.height = '4px';
+                    smoke.style.background = 'rgba(128, 128, 128, 0.6)';
+                    smoke.style.borderRadius = '50%';
+                    smoke.style.top = '-15px';
+                    smoke.style.left = '50%';
+                    smoke.style.transform = 'translateX(-50%)';
+                    smoke.style.animation = 'floatUp 2s ease-out forwards';
+                    candle.appendChild(smoke);
+                    
+                    setTimeout(() => smoke.remove(), 2000);
+                }, i * 100);
+            }
+        }
+
+        function showGift() {
+            document.getElementById('birthdaySection').style.display = 'none';
+            document.getElementById('giftSection').style.display = 'flex';
+        }
+
+        function openGift() {
+            document.getElementById('giftSection').style.display = 'none';
+            document.getElementById('animationSection').style.display = 'block';
+            
+            // Start the love animation
+            setTimeout(() => {
+                document.querySelector('.love-message').style.opacity = '1';
+                createFloatingHearts();
+                createConfetti();
+            }, 500);
+        }
+
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('floatingHearts');
+            const hearts = ['💖', '💕', '💗', '💝', '🌹', '⭐', '✨'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 5000);
+            }, 300);
+        }
+
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#a8e6cf', '#ffd93d'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 50);
+            }
+        }
+
+        // Allow Enter key to submit secret code
+        document.getElementById('secretCode').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                validateCode();
+            }
+        });
+
+        // Add some initial floating animations
+        window.addEventListener('load', () => {
+            // Add some ambient particles to secret section
+            const secretSection = document.getElementById('secretSection');
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.background = 'rgba(255, 255, 255, 0.3)';
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = '100%';
+                particle.style.animation = 'floatUp 8s linear forwards';
+                secretSection.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 8000);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
